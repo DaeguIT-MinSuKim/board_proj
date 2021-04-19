@@ -17,7 +17,7 @@
 			<span id="attach">
 				첨부파일 :
 				<c:if test="${article.board_file ne null}">
-					<a href="file_down?downFile=${article.board_file}">${article.board_file}</a>
+					<a href="file_down.do?downFile=${article.board_file}">${article.board_file}</a>
 				</c:if>
 			</span>
 		</article>

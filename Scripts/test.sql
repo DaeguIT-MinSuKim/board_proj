@@ -43,7 +43,7 @@ update board
  where BOARD_NUM = 23;
 
 -- 글 삭제
-select * from board where board_num = 14;
+select * from board where board_num = 23;
 
 delete 
   from board

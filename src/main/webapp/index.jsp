@@ -10,8 +10,10 @@
 <body>
 방가~~!!!
 <%=JndiDS.getConnection() %>
+<hr>
 <br>
 <a href="boardWriteForm.do">게시판글쓰기</a>
-
+<br>
+<a href="boardList.do">게시판 목록</a>
 </body>
 </html>

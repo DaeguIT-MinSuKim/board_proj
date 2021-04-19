@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import board_proj.action.Action;
 import board_proj.action.BoardDeleteProAction;
 import board_proj.action.BoardDetailAction;
+import board_proj.action.BoardFileDownAction;
 import board_proj.action.BoardListAction;
 import board_proj.action.BoardReplyFormAction;
 import board_proj.action.BoardWriteProAction;
@@ -85,6 +86,13 @@ public class BoardFrontController extends HttpServlet {
 			forward.setPath("/board/qna_board_delete.jsp");
 		}else if (command.equals("/boardDeletePro.do")) {
 			action = new BoardDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/file_down.do")) {
+			action = new BoardFileDownAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
