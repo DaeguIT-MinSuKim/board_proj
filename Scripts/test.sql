@@ -5,7 +5,7 @@ INSERT INTO web_gradle_erp.board
 (BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, BOARD_FILE, BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_DATE)
 VALUES(1, '김상건', '1111', '마칠시간', '5시', 'test.txt', 0, 0, 0, 0, '2021-03-03');
 
-select * from board;
+select * from board where BOARD_NUM = 26;
 
 INSERT INTO web_gradle_erp.board
 (BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, BOARD_FILE, BOARD_RE_REF)
@@ -42,8 +42,14 @@ update board
    set BOARD_READCOUNT = BOARD_READCOUNT + 1
  where BOARD_NUM = 23;
 
+-- 글 삭제
+select * from board where board_num = 14;
 
+delete 
+  from board
+ where BOARD_NUM = 26;
 
+select 1 from board where BOARD_NUM = 25 and BOARD_PASS = '234';
 
 
 
