@@ -52,6 +52,7 @@ public class BoardWriteProAction implements Action {
 			forward.setRedirect(true);
 			forward.setPath("boardList.do");
 		}else {
+			response.setContentType("text/html; charset=UTF-8"); 
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('등록실패')");

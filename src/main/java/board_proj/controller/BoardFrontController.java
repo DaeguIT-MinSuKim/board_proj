@@ -13,6 +13,8 @@ import board_proj.action.BoardDeleteProAction;
 import board_proj.action.BoardDetailAction;
 import board_proj.action.BoardFileDownAction;
 import board_proj.action.BoardListAction;
+import board_proj.action.BoardModifyFormAction;
+import board_proj.action.BoardModifyProAction;
 import board_proj.action.BoardReplyFormAction;
 import board_proj.action.BoardWriteProAction;
 import board_proj.dto.ActionForward;
@@ -93,6 +95,21 @@ public class BoardFrontController extends HttpServlet {
 			}
 		}else if (command.equals("/file_down.do")) {
 			action = new BoardFileDownAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/boardModifyForm.do")) {
+			action = new BoardModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/boardModifyPro.do")) {
+			//수정 적용
+			action = new BoardModifyProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

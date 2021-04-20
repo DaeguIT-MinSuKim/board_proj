@@ -7,21 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board_proj.dto.ActionForward;
-import board_proj.service.BoardDeleteService;
+import board_proj.dto.BoardDTO;
+import board_proj.service.BoardModifyProService;
 
-public class BoardDeleteProAction implements Action {
+public class BoardModifyProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// boardDeletePro.bo?board_num=26
-		// hidden page=1
-		// BOARD_PASS=aaa
-		
-		int board_num = Integer.parseInt(request.getParameter("board_num"));
-		String page = request.getParameter("page");
+		int board_num = Integer.parseInt(request.getParameter("BOARD_NUM"));
 		String pass = request.getParameter("BOARD_PASS");
-		
-		BoardDeleteService service = new BoardDeleteService();
+		int page= Integer.parseInt(request.getParameter("page"));;
+
+		BoardModifyProService service = new BoardModifyProService();
 		
 		ActionForward forward = null;
 		
@@ -31,15 +28,25 @@ public class BoardDeleteProAction implements Action {
 			return forward;
 		}
 		
-		boolean isDeleteSuccess = service.removeArticle(board_num);
-		if (!isDeleteSuccess) {
-			sendMessage(response, "삭제 실패");
+		BoardDTO article = new BoardDTO();
+		article.setBoard_num(board_num);
+		
+		String board_subject = request.getParameter("BOARD_SUBJECT");
+		article.setBoard_subject(board_subject);
+		
+		String board_content = request.getParameter("BOARD_CONTENT");
+		article.setBoard_content(board_content);
+		
+		System.out.println("article " + article);
+		boolean isModifySuccess = service.modifyArticle(article);
+		if (!isModifySuccess) {
+			sendMessage(response, "수정 실패");
 			return forward;
 		}
 
 		forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("boardList.do?page=" + page);
+		forward.setPath("boardDetail.do?board_num="+board_num+"&page="+page);
 		
 		return forward;
 	}

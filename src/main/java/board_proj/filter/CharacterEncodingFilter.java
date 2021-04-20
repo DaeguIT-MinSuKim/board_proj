@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
+import javax.servlet.http.HttpServletResponse;
 
 
 @WebFilter(
@@ -32,8 +33,9 @@ public class CharacterEncodingFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encoding);
-//		response.setCharacterEncoding(encoding);
-		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding(encoding);
+//		HttpServletResponse res = (HttpServletResponse) response;
+//		res.setContentType("text/html; charset="+encoding); 
 		chain.doFilter(request, response);
 	}
 
