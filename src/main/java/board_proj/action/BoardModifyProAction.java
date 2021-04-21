@@ -16,7 +16,7 @@ public class BoardModifyProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int board_num = Integer.parseInt(request.getParameter("BOARD_NUM"));
 		String pass = request.getParameter("BOARD_PASS");
-		int page= Integer.parseInt(request.getParameter("page"));;
+		int page= Integer.parseInt(request.getParameter("page"));
 
 		BoardModifyProService service = new BoardModifyProService();
 		

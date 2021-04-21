@@ -1,7 +1,5 @@
 package board_proj.dao;
 
-import static org.junit.Assert.fail;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -123,11 +121,19 @@ public class BoardDaoTest {
 	}
 
 	@Test
-	public void testInsertReplyArticle() {
-		fail("Not yet implemented");
+	public void test10InsertReplyArticle() {
+		System.out.println("test10InsertReplyArticle");
+		BoardDTO replyArticle = new BoardDTO("유한솔", "1111", "앙데4", "절대로4", "");
+		replyArticle.setBoard_re_ref(20);
+		//답변에 대한 답변
+		replyArticle.setBoard_re_lev(1);
+		replyArticle.setBoard_re_seq(1);
+		
+		
+		int res = dao.insertReplyArticle(replyArticle);
+		Assert.assertEquals(1, res);
+		System.out.println("res >> " + res);
 	}
-
-	
 
 
 }

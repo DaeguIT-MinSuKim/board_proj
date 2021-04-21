@@ -20,9 +20,9 @@
 		</article>
 		<article id="content">
 			<table border="1">
-				<tr>
+				<tr >
 					<td>번호</td>
-					<td>제목</td>
+					<td id="t_content">제목</td>
 					<td>작성자</td>
 					<td>날짜</td>
 					<td>조회수</td>
@@ -33,6 +33,10 @@
 							<tr>
 								<td>${board.board_num}</td>
 								<td>
+									<c:if test="${board.board_re_lev ne 0}">
+										<c:forEach var="i" begin="1" end="${board.board_re_lev}" >&nbsp;</c:forEach>
+										└
+									</c:if>
 									<a href="boardDetail.do?board_num=${board.board_num}&page=${pageInfo.page }">${board.board_subject}</a>
 								</td>
 								<td>${board.board_name}</td>

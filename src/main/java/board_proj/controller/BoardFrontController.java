@@ -16,6 +16,7 @@ import board_proj.action.BoardListAction;
 import board_proj.action.BoardModifyFormAction;
 import board_proj.action.BoardModifyProAction;
 import board_proj.action.BoardReplyFormAction;
+import board_proj.action.BoardReplyProAction;
 import board_proj.action.BoardWriteProAction;
 import board_proj.dto.ActionForward;
 
@@ -110,6 +111,20 @@ public class BoardFrontController extends HttpServlet {
 		}else if (command.equals("/boardModifyPro.do")) {
 			//수정 적용
 			action = new BoardModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/boardReplyForm.do")) {
+			action = new BoardReplyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/boardReplyPro.do")) {
+			action = new BoardReplyProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
