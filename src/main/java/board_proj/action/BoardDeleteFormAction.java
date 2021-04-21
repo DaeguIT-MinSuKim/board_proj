@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board_proj.dto.ActionForward;
 
-public class ActionBoardDeleteForm implements Action {
+public class BoardDeleteFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

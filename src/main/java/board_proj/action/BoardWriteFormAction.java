@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board_proj.dto.ActionForward;
 
-public class ActionBoardWriteForm implements Action {
+public class BoardWriteFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
