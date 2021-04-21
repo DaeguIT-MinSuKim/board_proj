@@ -1,6 +1,9 @@
 package board_proj.action;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.ServletContext;
@@ -13,7 +16,7 @@ import board_proj.dto.ActionForward;
 public class BoardFileDownAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response){
 		String fileName = request.getParameter("downFile");
 
 		String savePath = "boardUpload";
@@ -33,13 +36,15 @@ public class BoardFileDownAction implements Action {
 		response.setContentType(sMimeType);
 		String agent = request.getHeader("User-Agent");
 		boolean ieBrowser = (agent.indexOf("MSIE") > -1) || (agent.indexOf("Trident") > -1);
-
-		if (ieBrowser) {
-			fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
-		} else {
-			fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+		try {
+			if (ieBrowser) {
+					fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+			} else {
+				fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
-
 		response.setHeader("Content-Disposition", "attachment; filename= " + fileName);
 
 		try(FileInputStream in = new FileInputStream(sFilePath);
@@ -50,6 +55,10 @@ public class BoardFileDownAction implements Action {
 				out2.write(b, 0, numRead);
 			}
 			out2.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return null;

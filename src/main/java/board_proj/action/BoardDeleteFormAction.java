@@ -8,7 +8,7 @@ import board_proj.dto.ActionForward;
 public class BoardDeleteFormAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) /* throws Exception */ {
 		String nowPage = request.getParameter("page");
 		request.setAttribute("page", nowPage);
 		

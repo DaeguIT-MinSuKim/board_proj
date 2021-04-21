@@ -1,7 +1,5 @@
 package board_proj.action;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +10,7 @@ import board_proj.service.BoardReplyProService;
 public class BoardReplyProAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		int page = Integer.parseInt(request.getParameter("page"));
 		BoardDTO article = getArticle(request);
 		System.out.println("article > " + article);
@@ -25,11 +23,7 @@ public class BoardReplyProAction implements Action {
 			forward = new ActionForward("boardList.do?page="+page, true);
 		}else {
 			response.setContentType("text/html;charset=UTF-8");
-   			PrintWriter out = response.getWriter();
-   			out.println("<script>");
-   			out.println("alert('답변 등록 실패')");
-   			out.println("history.back()");
-   			out.println("</script>");
+			SendMessage.sendMessage(response, "답변 등록 실패");
 		}
 		
 		return forward;
