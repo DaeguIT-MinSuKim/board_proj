@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board_proj.action.Action;
+import board_proj.action.NullAction;
 import board_proj.dto.ActionForward;
 
 @WebServlet(urlPatterns = {"*.do"},
@@ -38,12 +39,19 @@ public class BoardFrontController extends HttpServlet {
 			props.load(is);
 			
 			for(Entry<Object, Object> entry : props.entrySet()) {
-				Class<?> cls = Class.forName((String)entry.getValue());
-				Action action = (Action) cls.newInstance();
+				Class<?> cls;
+				Action action = null;
+				try {
+					cls = Class.forName((String)entry.getValue());
+					action = (Action) cls.newInstance();
+				} catch (ClassNotFoundException e) {
+					action = new NullAction();
+					e.printStackTrace();
+				}
 				actionMap.put((String)entry.getKey(), action);
 			}
 
-		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+		} catch (IOException | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 	}
