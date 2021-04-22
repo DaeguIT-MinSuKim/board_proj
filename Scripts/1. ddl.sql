@@ -15,3 +15,4 @@ create table if not exists web_gradle_erp.board(
 	PRIMARY KEY(BOARD_NUM)
 ); 
 
+
